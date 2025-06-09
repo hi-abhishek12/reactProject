@@ -3,6 +3,7 @@ import {Input} from "./index";
 import {Button} from "./index";
 import {useDispatch} from 'react-redux'
 import { addNote } from "../store/notesSlice";
+
 function AddNote() {
   const [notesMsg, setnotesMsg] = useState('')
   const [notesTitle, setnotesTitle] = useState('')
