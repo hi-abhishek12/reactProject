@@ -1,12 +1,7 @@
-import { createSlice , nonoid} from '@reduxjs/toolkit'
-import { act } from 'react'
+import { createSlice , nanoid} from '@reduxjs/toolkit'
 
 const initialState = {
-   notes : [{
-      id : 1,
-      notesTitle : '',
-      notesMsg : ''
-   }]
+   notes : [{id : 1, notesTitle : 'Title', notesMsg : 'message'}]
 }
 
 const notesSlice = createSlice({
@@ -15,19 +10,19 @@ const notesSlice = createSlice({
    reducers : {
       addNote : (state , action) =>{
          const todo = {
-            id : nonoid(),
-            notesTitle : action.payload,
-            notesMsg : action.payload
+            id : nanoid(),
+            notesTitle : action.payload.title,
+            notesMsg : action.payload.msg
          }
          state.notes.push(todo)
       },
       updateNote : (state , action) =>{
          notes.map((note) => note.id === action.payload.id(
-           
+           state.notes = action.payload
          ))
       },
       removeNote : (state , action) => {
-
+         state.notes = notes.filter((note) => note.id !== action.payload.id)
       }
       
    }
