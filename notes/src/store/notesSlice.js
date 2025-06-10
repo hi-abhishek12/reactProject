@@ -1,7 +1,7 @@
 import { createSlice , nanoid} from '@reduxjs/toolkit'
 
 const initialState = {
-   notes : [{id : 1, notesTitle : 'Title', notesMsg : 'message'}]
+    notes : JSON.parse(localStorage.getItem("notes")) || []
 }
 
 const notesSlice = createSlice({
@@ -9,12 +9,12 @@ const notesSlice = createSlice({
    initialState,
    reducers : {
       addNote : (state , action) =>{
-         const todo = {
+         const notes = {
             id : nanoid(),
             notesTitle : action.payload.title,
             notesMsg : action.payload.msg
          }
-         state.notes.push(todo)
+         state.notes.push(notes)
       },
       updateNote : (state , action) =>{
          notes.map((note) => note.id === action.payload.id(
@@ -22,6 +22,7 @@ const notesSlice = createSlice({
          ))
       },
       removeNote : (state , action) => {
+        state.notes = state.notes.filter((note) => note.id !== action.payload)
       }
       
    }
