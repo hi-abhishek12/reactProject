@@ -2,7 +2,7 @@ import React from 'react'
 
 function Button({
   children,
-  type,
+  type = "button",
   className = '',
   ...props
 }) {

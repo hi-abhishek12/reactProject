@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Button} from './index';
+import NotEditMode from './NotEditMode';
 import { removeNote } from '../store/notesSlice';
 import { useSelector , useDispatch } from 'react-redux'
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
@@ -9,12 +10,27 @@ function NotesList() {
     const notesList = useSelector((state) => state.notes.notes);
 
     const [openMenu, setopenMenu] = React.useState(null)
+    const [isTodoEditable , setisTodoEditable] = useState(null)
+
+    //<------ Functions  ------->
+
     const menuStatus = (id) =>{
         if(openMenu === id){
           setopenMenu(null)
-        }else{
+        }
+        else{
           setopenMenu(id)
         }
+    }
+
+    const editTodo = (id) =>{
+      if(isTodoEditable == id){
+        setisTodoEditable(null)
+      }
+      else{
+        setisTodoEditable(id)
+        setopenMenu(null)
+      }
     }
    
     React.useEffect(() =>{
@@ -46,8 +62,9 @@ function NotesList() {
                     Delete
                 </Button>
                 <Button type="button"
+                  onClick={() => editTodo(note.id)}
                   className="w-full text-left px-3 py-1 hover:bg-[#3c3e40] rounded">
-                    Add label
+                    Edit
                 </Button>
                 <Button
                   type="button"
@@ -55,6 +72,12 @@ function NotesList() {
                     Make a copy
                 </Button>
               </div>}
+
+              {isTodoEditable == note.id && 
+              <NotEditMode  
+                noteTitle={note.notesTitle}
+                noteMsg = {note.notesMsg}
+              />}
               
       </div>
       ))}
