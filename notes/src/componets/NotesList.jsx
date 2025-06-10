@@ -8,9 +8,13 @@ function NotesList() {
     const dispatch = useDispatch()
     const notesList = useSelector((state) => state.notes.notes);
 
-    const [openMenu, setopenMenu] = React.useState(false)
-    const menuStatus = () =>{
-        setopenMenu(!openMenu)
+    const [openMenu, setopenMenu] = React.useState(null)
+    const menuStatus = (id) =>{
+        if(openMenu === id){
+          setopenMenu(null)
+        }else{
+          setopenMenu(id)
+        }
     }
    
   return (
@@ -25,10 +29,10 @@ function NotesList() {
           <p className="text-gray-700 whitespace-pre-wrap">{note.notesMsg}</p>
 
           <EllipsisVerticalIcon
-            onClick={menuStatus}
+            onClick={() => menuStatus(note.id)}
             className="h-6 w-6 text-gray-600 cursor-pointer hover:text-gray-800" />
 
-            {openMenu && 
+            {openMenu === note.id && 
               <div className="absolute right-0 mt-2 w-52 bg-[#2d2f31]
                text-sm text-white rounded-lg shadow-lg p-2 z-10 space-y-1">
                 <Button type = "button"
@@ -45,9 +49,9 @@ function NotesList() {
                   className="w-full text-left px-3 py-1 hover:bg-[#3c3e40] rounded">
                     Make a copy
                 </Button>
-
               </div>}
-        </div>
+              
+      </div>
       ))}
     </div>
   )
