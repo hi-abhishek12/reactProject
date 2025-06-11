@@ -16,10 +16,15 @@ const notesSlice = createSlice({
          }
          state.notes.push(notes)
       },
+      //title : title , msg : msg , noteId : noteId
       updateNote : (state , action) =>{
-         notes.map((note) => note.id === action.payload.id(
-           state.notes = action.payload
-         ))
+         const { title , msg , noteId} = action.payload
+        
+          const noteToEdit = state.notes.find((note) => note.id === noteId)
+          if(noteToEdit){
+            noteToEdit.notesTitle = title,
+            noteToEdit.notesMsg = msg
+          }
       },
       removeNote : (state , action) => {
         state.notes = state.notes.filter((note) => note.id !== action.payload)

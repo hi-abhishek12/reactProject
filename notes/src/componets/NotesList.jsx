@@ -75,6 +75,7 @@ function NotesList() {
 
               {isTodoEditable == note.id && 
               <NotEditMode  
+                noteId={note.id}
                 noteTitle={note.notesTitle}
                 noteMsg = {note.notesMsg}
               />}
