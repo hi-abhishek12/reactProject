@@ -13,6 +13,7 @@ function NotesList() {
 
   const [openMenu, setopenMenu] = React.useState(null);
   const [isTodoEditable, setisTodoEditable] = useState(null);
+  const [pin , setPin] = useState(null)
 
   //<------ Functions  ------->
 
@@ -34,7 +35,12 @@ function NotesList() {
   };
   
   const handlePin = (id)=>{
-    
+    if(pin == id){
+      setPin(null)
+    }
+    else{
+      setPin(id)
+    }
   }
   React.useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notesList));
@@ -105,6 +111,12 @@ function NotesList() {
               onClose={() => setisTodoEditable(null)}
             />
           )}
+          {pin == note.id && 
+            <div className="absolute top-2 left-2 bg-yellow-400 
+              text-white text-xs font-semibold px-2 py-1 rounded">
+            📌 Pinned
+            </div>
+          }
         </div>
       ))}
     </div>
