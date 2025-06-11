@@ -28,9 +28,19 @@ const notesSlice = createSlice({
       },
       removeNote : (state , action) => {
         state.notes = state.notes.filter((note) => note.id !== action.payload)
+      },
+
+      copyNote :(state , action) =>{
+         const {title , msg} = action.payload
+        const newNote = {
+            id : nanoid(),
+            notesTitle : title,
+            notesMsg : msg
+        }
+        state.notes.unshift(newNote)
       }
       
    }
 })
-export const {addNote , updateNote , removeNote} = notesSlice.actions
+export const {addNote , updateNote , removeNote , copyNote} = notesSlice.actions
 export default notesSlice.reducer

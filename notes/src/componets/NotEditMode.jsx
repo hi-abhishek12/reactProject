@@ -2,19 +2,16 @@ import React, { useState } from "react";
 import { Input, Button } from "./index";
 import { useDispatch } from "react-redux";
 import { updateNote } from "../store/notesSlice";
-function NotEditMode({ noteTitle, noteMsg, noteId }) {
+
+function NotEditMode({ noteTitle, noteMsg, noteId , onClose}) {
 
     const dispatch = useDispatch()
     const [title , setTitle] = useState(noteTitle)
     const [msg, setMsg] = useState(noteMsg)
-    const [isEditModeOpen, setisEditModeOpen] = useState(false)
-
-    React.useEffect(() =>{
-        
-    },[title,msg])
 
     const saveButton = () =>{
       dispatch(updateNote({title : title , msg : msg , noteId : noteId}))
+      onClose();
     }
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -37,8 +34,10 @@ function NotEditMode({ noteTitle, noteMsg, noteId }) {
         </div>
 
         <div className="flex justify-end gap-3 pt-4">
-          <Button className="bg-gray-200 text-gray-800 hover:bg-gray-300">
-            Close
+          <Button 
+            onClick={() => onClose()}
+            className="bg-gray-200 text-gray-800 hover:bg-gray-300">
+              Close
           </Button>
           <Button 
             onClick={saveButton}
