@@ -3,10 +3,12 @@ import {Input} from "./index";
 import {Button} from "./index";
 import {useDispatch} from 'react-redux'
 import { addNote } from "../store/notesSlice";
-
+import NoteTextarea from "./NoteTextarea";
 function AddNote() {
   const [notesMsg, setnotesMsg] = useState('')
   const [notesTitle, setnotesTitle] = useState('')
+  const [inputExpanded, setInputExpanded] = useState(false); // Default false
+
   const [isInputExpandable, setIsInputExpandable] = useState(false)
   const dispatch = useDispatch()
 
@@ -14,9 +16,11 @@ function AddNote() {
 
   const inputExpand = () => {
     setIsInputExpandable(true);
+    setInputExpanded(!inputExpanded)
   };
   const close = () =>{
     setIsInputExpandable(false)
+    setInputExpanded(false)
   }
 
   const addNotes = (event) =>{
@@ -45,15 +49,14 @@ function AddNote() {
       />
     )}
 
-    <Input 
-      type="text" 
-      placeholder="Take a note..." 
-      value={notesMsg}
-      onClick={inputExpand}
-      onChange={(event) => setnotesMsg(event.target.value)}
-      className="px-4 py-2 rounded-md border border-gray-300 
-      focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
-    />
+
+  <NoteTextarea
+    value={notesMsg}
+    onClick={inputExpand}
+    onChange={(e) => setnotesMsg(e.target.value)}
+    rows={inputExpanded ? 3 : 1}
+  />
+
   </div>
 
   {/* 🟢 Moved out of clickable div */}
