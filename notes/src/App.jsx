@@ -1,23 +1,27 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
-import Navbar from './componets/Navbar'
-import NotesList from './componets/NotesList'
-import AddNote from './componets/AddNote'
+import { Outlet } from 'react-router'
 import './App.css'
+import {Sidebar , Navbar} from './componets/index';
 
 function App() {
+    const [isSidebarOpen , setIsSidebarOpen] = useState(false)
+    
+   return (
+    <div className="h-screen flex flex-col">
+      {/* ✅ Top Navbar */}
+      <Navbar toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
 
-  return (
-    <>
-     <Navbar/>
-     <AddNote/>
-     <NotesList/>
-     <main>
-      <Outlet/>
-     </main>
-    </>
-
-  )
+      {/* ✅ Bottom: Sidebar + Routed Page */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Sidebar */}
+        {isSidebarOpen && <Sidebar/>}
+        {/* Routed Content via <Outlet /> */}
+        <div className="flex-1 overflow-y-auto p-6">
+          <Outlet />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App

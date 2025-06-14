@@ -1,9 +1,12 @@
 import React from 'react'
-
+import { AddNote , NotesList } from '../componets/index'
 function Home() {
   return (
-    <div>Welcome to Mac Notes</div>
-  )
+   <>
+     <AddNote/>
+     <NotesList/>  
+   </>
+    )
 }
 
 export default Home

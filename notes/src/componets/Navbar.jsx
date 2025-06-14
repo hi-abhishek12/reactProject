@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import Input from "./Input";
-import Sidebar from "./Sidebar";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-function Navbar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const sidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+function Navbar({toggleSidebar}) {
+  
   return (
     <>
       <div className="flex items-center justify-between px-4 py-2 bg-white shadow">
         <Bars3Icon
           className="h-6 w-6 text-gray-700 cursor-pointer"
-          onClick={sidebar}
+          onClick={toggleSidebar}
         />
 
         {/* Input with search icon */}
@@ -30,7 +25,7 @@ function Navbar() {
           />
         </div>
       </div>
-      {isSidebarOpen && <Sidebar />}
+     
     </>
   );
 }

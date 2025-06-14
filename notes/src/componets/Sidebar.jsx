@@ -1,6 +1,5 @@
 import React from "react";
-import AddNote from "./AddNote";
-import NotesList from "./NotesList";
+import { Link } from "react-router";
 import {
   PencilSquareIcon,
   BellIcon,
@@ -9,38 +8,38 @@ import {
 } from "@heroicons/react/24/outline";
 
 function Sidebar() {
-  return (
-    <div className="flex">
-  {/* Sidebar */}
-  <div className="h-screen w-[250px] bg-white shadow-lg p-4 space-y-4 text-gray-700">
-    <ul className="flex flex-col gap-4">
-      <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-        <PencilSquareIcon className="h-5 w-5 text-gray-500" />
-        Notes
-      </li>
-      <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-        <BellIcon className="h-5 w-5 text-gray-500" />
-        Reminders
-      </li>
-      <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-        <TagIcon className="h-5 w-5 text-gray-500" />
-        Edit labels
-      </li>
-      <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
-        <TrashIcon className="h-5 w-5 text-gray-500" />
-        Trash
-      </li>
-    </ul>
-  </div>
-
-  {/* Main content */}
-  <div className="flex-1 p-6">
-    <AddNote />
-    <NotesList/>
-  </div>
-</div>
-
-  );
+  return(
+     <aside className="h-full w-[250px] bg-white shadow-md p-4 text-gray-700">
+      <ul className="flex flex-col gap-4">
+        <li>
+          <Link
+            to="/"
+            className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md"
+          >
+            <PencilSquareIcon className="h-5 w-5 text-gray-500" />
+            Notes
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/remainders"
+            className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md"
+          >
+            <BellIcon className="h-5 w-5 text-gray-500" />
+            Reminders
+          </Link>
+        </li>
+        <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <TagIcon className="h-5 w-5 text-gray-500" />
+          Edit labels
+        </li>
+        <li className="flex items-center gap-3 hover:bg-gray-100 p-2 rounded-md cursor-pointer">
+          <TrashIcon className="h-5 w-5 text-gray-500" />
+          Trash
+        </li>
+      </ul>
+    </aside>
+  )
 }
 
 export default Sidebar;
