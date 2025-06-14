@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
 import Navbar from './componets/Navbar'
 import NotesList from './componets/NotesList'
 import AddNote from './componets/AddNote'
@@ -11,6 +12,9 @@ function App() {
      <Navbar/>
      <AddNote/>
      <NotesList/>
+     <main>
+      <Outlet/>
+     </main>
     </>
 
   )

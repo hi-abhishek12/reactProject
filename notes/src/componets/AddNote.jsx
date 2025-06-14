@@ -4,10 +4,11 @@ import {Button} from "./index";
 import {useDispatch} from 'react-redux'
 import { addNote } from "../store/notesSlice";
 import NoteTextarea from "./NoteTextarea";
+
 function AddNote() {
   const [notesMsg, setnotesMsg] = useState('')
   const [notesTitle, setnotesTitle] = useState('')
-  const [inputExpanded, setInputExpanded] = useState(false); // Default false
+  const [inputExpanded, setInputExpanded] = useState(false); 
 
   const [isInputExpandable, setIsInputExpandable] = useState(false)
   const dispatch = useDispatch()

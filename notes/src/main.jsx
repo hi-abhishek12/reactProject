@@ -4,11 +4,20 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import './index.css'
 import App from './App.jsx'
+import Remainder from './pages/Remainder.jsx'
+import { BrowserRouter, Routes, Route } from "react-router";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+         <Routes>
+          <Route path="/" element={<App />}>
+          <Route path="remainders" element={<Remainder />} />
+          </Route>
+        </Routes>
+
+      </BrowserRouter>
     </Provider>
   </StrictMode>,
 )
