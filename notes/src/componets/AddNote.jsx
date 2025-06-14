@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import {Input} from "./index";
-import {Button} from "./index";
+import {Input , Button} from "./index";
 import {useDispatch} from 'react-redux'
 import { addNote } from "../store/notesSlice";
 import NoteTextarea from "./NoteTextarea";
 
-function AddNote() {
+function AddNote({onSubmit , showRemainderTime}) {
   const [notesMsg, setnotesMsg] = useState('')
   const [notesTitle, setnotesTitle] = useState('')
   const [inputExpanded, setInputExpanded] = useState(false); 
@@ -31,6 +30,7 @@ function AddNote() {
     setnotesTitle("")
     
   }
+
   return (
   <form 
   onSubmit={addNotes} 
