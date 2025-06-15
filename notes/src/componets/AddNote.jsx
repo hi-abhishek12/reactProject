@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import {Input , Button} from "./index";
-import {useDispatch} from 'react-redux'
-import { addNote } from "../store/notesSlice";
 import NoteTextarea from "./NoteTextarea";
 
 function AddNote({onSubmit , showRemainderTime}) {
   const [notesMsg, setnotesMsg] = useState('')
   const [notesTitle, setnotesTitle] = useState('')
   const [inputExpanded, setInputExpanded] = useState(false); 
-
+  const [dateTime , setDateTime] = useState('')
   const [isInputExpandable, setIsInputExpandable] = useState(false)
-  const dispatch = useDispatch()
+
 
   //Functions ----->
 
@@ -25,7 +23,10 @@ function AddNote({onSubmit , showRemainderTime}) {
 
   const addNotes = (event) =>{
     event.preventDefault()
-    dispatch(addNote({title : notesTitle , msg : notesMsg}))
+    if(onSubmit){
+      onSubmit({title : notesTitle , msg : notesMsg})
+    }
+   
     setnotesMsg("")
     setnotesTitle("")
     
@@ -57,6 +58,15 @@ function AddNote({onSubmit , showRemainderTime}) {
     onChange={(e) => setnotesMsg(e.target.value)}
     rows={inputExpanded ? 3 : 1}
   />
+
+ {showRemainderTime && 
+  <Input 
+    type="date-time"
+    value={dateTime}
+    onChange={(event) => setDateTime(event.target.value)}
+  />
+    
+ }
 
   </div>
 

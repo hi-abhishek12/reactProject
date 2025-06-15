@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Input, Button , AddNote} from "../componets/index";
+import { useDispatch } from "react-redux";
+import {AddNote} from "../componets/index";
 function Remainder() {
-  const [showRemainder, setShowRemainder] = useState(true)
+  const dispatch = useDispatch()
   return (
     <div>
-        <AddNote/>
+        <AddNote onSubmit={(data)=> (dispatch())}showRemainderTime={true}/>
     </div>
   );
 }
